@@ -9,6 +9,7 @@ import Overview from './components/Overview';
 import QuestionBank from './components/QuestionBank';
 import MockDefense from './components/MockDefense';
 import PPTRehearsal from './components/PPTRehearsal';
+import CountdownTimer from './components/CountdownTimer';
 
 type Tab = 'overview' | 'ppt' | 'qa' | 'mock';
 
@@ -18,14 +19,13 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col p-4 sm:p-8 overflow-hidden font-sans selection:bg-blue-200 selection:text-slate-900">
       {/* Header Section */}
-      <header className="max-w-7xl mx-auto w-full flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 border-b border-slate-200 pb-6">
-        <div className="flex flex-col mb-4 sm:mb-0">
-          <span className="text-blue-600 font-medium text-sm tracking-widest uppercase mb-1">Thesis Defense Assistant v1.0</span>
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900">毕业答辩准备系统</h1>
+      <header className="max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between items-start md:items-end mb-6 border-b border-slate-200 pb-4 gap-4">
+        <div className="flex flex-col">
+          <span className="text-blue-600 font-medium text-xs tracking-wider uppercase mb-1 drop-shadow-sm"></span>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">基于Python的茶产品销售系统</h1>
         </div>
-        <div className="text-left sm:text-right flex flex-col items-start sm:items-end">
-          <div className="bg-blue-600 text-white px-4 py-1.5 font-medium text-sm rounded-full mb-2 shadow-sm">冲刺复习模式 (Active)</div>
-          <div className="text-slate-500 text-sm">学习进度追踪：持续更新中</div>
+        <div className="flex-shrink-0 w-full md:w-auto">
+          <CountdownTimer />
         </div>
       </header>
 
@@ -60,15 +60,7 @@ export default function App() {
               label="模拟练习"
             />
           </div>
-          <div className="mt-6 p-5 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl mx-1 shadow-sm">
-            <h4 className="font-bold text-blue-900 mb-2 flex items-center">
-              <Target className="w-4 h-4 mr-1.5" /> 导师答辩建议
-            </h4>
-            <p className="text-sm text-slate-700 leading-relaxed mb-3">“答辩的核心不仅是代码实现，更是对设计思路和解决问题过程的清晰阐述。遇到问题不要慌，理清逻辑，自信表达。”</p>
-            <div className="flex justify-end">
-              <span className="text-xs text-blue-700 font-bold bg-blue-100 px-2 py-1 rounded-md">— 评委组长</span>
-            </div>
-          </div>
+
         </nav>
 
         {/* Main Content Area */}

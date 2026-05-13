@@ -12,7 +12,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 let aiClient: GoogleGenAI | null = null;
 const getAI = () => {
   if (!aiClient) {
-    aiClient = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "missing_api_key_on_vercel" });
+    const apiKey = typeof process !== 'undefined' && process.env ? process.env.GEMINI_API_KEY : (import.meta.env.VITE_GEMINI_API_KEY || "missing_api_key_on_vercel");
+    aiClient = new GoogleGenAI({ apiKey: apiKey || "missing_api_key_on_vercel" });
   }
   return aiClient;
 };
@@ -255,10 +256,10 @@ ${transcript.trim() ? `【学生刚刚的真实口头汇报片段】：\n"${tran
     <div className="space-y-6">
       <div className="mb-6 flex flex-col justify-center">
         <h2 className="text-3xl font-bold text-slate-900 leading-tight">
-          PPT 汇报实景推演
+          PPT 汇报
         </h2>
         <p className="text-slate-500 mt-2">
-          系统已预置了26页大纲。<strong className="text-blue-600">您可以直接将真实PPT的演讲稿/内容粘贴到右侧文本框里，覆盖原有默认内容。</strong> 老师将完全基于您输入的实时文本进行“灵魂拷问打断”。
+          <strong className="text-blue-600">可以在这上传茶产品销售系统的PPT。</strong> 系统将基于您输入的实时文本进行提问。
         </p>
       </div>
 
@@ -475,7 +476,7 @@ ${transcript.trim() ? `【学生刚刚的真实口头汇报片段】：\n"${tran
                className="w-full flex items-center justify-center px-6 py-4 bg-orange-100 text-orange-700 hover:bg-orange-200 disabled:opacity-50 disabled:cursor-not-allowed font-bold rounded-xl transition-all shadow-sm active:scale-95 text-lg"
              >
                {generating ? <Loader2 className="w-6 h-6 mr-2 animate-spin" /> : <Sparkles className="w-6 h-6 mr-2" />}
-               {generating ? "老师正在仔细审阅找茬..." : (transcript ? "根据您说的文字，主动请求老师打断提问！" : "根据当前粘贴的文字，请求导师打断发问！")}
+               {generating ? "老师正在找茬..." : (transcript ? "根据您说的文字，主动请求老师打断提问！" : "根据当前粘贴的文字，请求导师打断发问！")}
              </button>
           </div>
 

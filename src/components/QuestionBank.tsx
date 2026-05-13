@@ -7,7 +7,8 @@ import { GoogleGenAI } from '@google/genai';
 let aiClient: GoogleGenAI | null = null;
 const getAI = () => {
   if (!aiClient) {
-    aiClient = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "missing_api_key_on_vercel" });
+    const apiKey = typeof process !== 'undefined' && process.env ? process.env.GEMINI_API_KEY : (import.meta.env.VITE_GEMINI_API_KEY || "missing_api_key_on_vercel");
+    aiClient = new GoogleGenAI({ apiKey: apiKey || "missing_api_key_on_vercel" });
   }
   return aiClient;
 };

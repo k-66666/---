@@ -33,7 +33,7 @@ export default function MockDefense() {
           <h2 className="text-3xl font-bold text-slate-900 leading-tight">
             答辩模拟练习
           </h2>
-          <p className="text-slate-500 mt-2">系统随机抽取题目进行模拟问答，检验准备情况。</p>
+          <p className="text-slate-500 mt-2">随机抽取题目进行模拟问答，检验准备情况。</p>
         </div>
 
         <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-12 text-center max-w-2xl mx-auto flex flex-col items-center">
@@ -42,7 +42,7 @@ export default function MockDefense() {
           </div>
           <h2 className="text-2xl font-semibold text-slate-900 mb-3">进入模拟问答</h2>
           <p className="text-slate-600 mb-8 max-w-md mx-auto leading-relaxed">
-            点击开始后，系统将从整个题库中随机向您抛出问题。您可以尝试先自己阐述答案，然后再查看参考解答。
+            点击开始后，将从整个题库中随机提出问题。可以先自己想答案，然后再看参考答案。
           </p>
           <button 
             onClick={startSession}
