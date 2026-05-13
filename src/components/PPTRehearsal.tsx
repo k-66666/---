@@ -9,7 +9,13 @@ import 'react-pdf/dist/Page/TextLayer.css';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+let aiClient: GoogleGenAI | null = null;
+const getAI = () => {
+  if (!aiClient) {
+    aiClient = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "missing_api_key_on_vercel" });
+  }
+  return aiClient;
+};
 
 export default function PPTRehearsal() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -174,7 +180,7 @@ ${slideText}
 
 请直接用文字返回反馈，不要加多余的markdown代码块标签。可以适当使用换行或列表。`;
 
-      const response = await ai.models.generateContent({
+      const response = await getAI().models.generateContent({
          model: 'gemini-2.5-flash',
          contents: prompt,
       });
@@ -206,7 +212,7 @@ ${transcript.trim() ? `【学生刚刚的真实口头汇报片段】：\n"${tran
   "a": "应对回答思路：..."
 }`;
 
-        const response = await ai.models.generateContent({
+        const response = await getAI().models.generateContent({
              model: 'gemini-2.5-flash',
              contents: prompt,
              config: { responseMimeType: "application/json" }

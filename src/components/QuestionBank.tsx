@@ -4,7 +4,13 @@ import { ChevronDown, MessageCircleQuestion, Sparkles, Loader2 } from 'lucide-re
 import { questions } from '../data/questions';
 import { GoogleGenAI } from '@google/genai';
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+let aiClient: GoogleGenAI | null = null;
+const getAI = () => {
+  if (!aiClient) {
+    aiClient = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "missing_api_key_on_vercel" });
+  }
+  return aiClient;
+};
 
 export default function QuestionBank() {
   const [topic, setTopic] = useState("");
@@ -25,7 +31,7 @@ export default function QuestionBank() {
 ]
 难度只能是：简单、中等、偏难、主观发散。
 `;
-        const response = await ai.models.generateContent({
+        const response = await getAI().models.generateContent({
              model: 'gemini-2.5-flash',
              contents: prompt,
              config: { responseMimeType: "application/json" } // forces JSON parsing
