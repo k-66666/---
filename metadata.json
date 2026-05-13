@@ -1,0 +1,6 @@
+{
+  "name": "PPT Rehearsal Simulator",
+  "description": "A tool to simulate graduation defense rehearsal with real-time AI interruption and speech recognition.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": []
+}
